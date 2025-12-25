@@ -12,7 +12,7 @@ export function CreateMob() {
   };
 
   return (
-    <Button className="self-center" onClick={handleClick}>
+    <Button variant="outline" className="self-center" onClick={handleClick}>
       Create mob
     </Button>
   );
