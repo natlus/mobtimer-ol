@@ -8,82 +8,43 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as MIdRouteImport } from './routes/m/$id'
+import { Route as IDataRouteImport } from './routes/i/$data'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as MIdImport } from './routes/m/$id'
-import { Route as IDataImport } from './routes/i/$data'
-
-// Create/Update Routes
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const MIdRoute = MIdImport.update({
+const MIdRoute = MIdRouteImport.update({
   id: '/m/$id',
   path: '/m/$id',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IDataRoute = IDataImport.update({
+const IDataRoute = IDataRouteImport.update({
   id: '/i/$data',
   path: '/i/$data',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/i/$data': {
-      id: '/i/$data'
-      path: '/i/$data'
-      fullPath: '/i/$data'
-      preLoaderRoute: typeof IDataImport
-      parentRoute: typeof rootRoute
-    }
-    '/m/$id': {
-      id: '/m/$id'
-      path: '/m/$id'
-      fullPath: '/m/$id'
-      preLoaderRoute: typeof MIdImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/i/$data': typeof IDataRoute
   '/m/$id': typeof MIdRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/i/$data': typeof IDataRoute
   '/m/$id': typeof MIdRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/i/$data': typeof IDataRoute
   '/m/$id': typeof MIdRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/i/$data' | '/m/$id'
@@ -92,11 +53,36 @@ export interface FileRouteTypes {
   id: '__root__' | '/' | '/i/$data' | '/m/$id'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   IDataRoute: typeof IDataRoute
   MIdRoute: typeof MIdRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/m/$id': {
+      id: '/m/$id'
+      path: '/m/$id'
+      fullPath: '/m/$id'
+      preLoaderRoute: typeof MIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/i/$data': {
+      id: '/i/$data'
+      path: '/i/$data'
+      fullPath: '/i/$data'
+      preLoaderRoute: typeof IDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -104,31 +90,6 @@ const rootRouteChildren: RootRouteChildren = {
   IDataRoute: IDataRoute,
   MIdRoute: MIdRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/i/$data",
-        "/m/$id"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/i/$data": {
-      "filePath": "i/$data.tsx"
-    },
-    "/m/$id": {
-      "filePath": "m/$id.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
