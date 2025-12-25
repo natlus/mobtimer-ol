@@ -206,8 +206,12 @@ function useCreateDelete() {
     const id = generateUniqueId();
 
     if (mob) {
+      console.log(
+        `Creating mob with ID ${id} and participants ${mob.participants}`,
+      );
       setMobs([...mobs, { ...mob, id }]);
     } else {
+      console.log(`Creating mob with ID ${id} and no participants`);
       setMobs([...mobs, { id, participants: [] }]);
     }
 

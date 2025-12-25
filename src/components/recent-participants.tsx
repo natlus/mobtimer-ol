@@ -15,14 +15,14 @@ export function ReceptParticipants({ className }: { className?: string }) {
 
   return (
     <div className={cn("flex flex-wrap gap-1 py-2 text-xs", className)}>
-      Suggestions:
+      suggested:
       {suggestions.map((participant) => (
         <button
           onClick={() => {
             addParticipant(participant);
           }}
           key={participant}
-          className="hover:underline"
+          className="hover:text-orange transition-color duration-200"
         >
           {participant}
           {suggestions.indexOf(participant) < suggestions.length - 1 && ","}

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import { decompressFromEncodedURIComponent } from "lz-string";
 import { useMobs } from "@/lib/useMobs";
 
@@ -13,9 +13,10 @@ function RouteComponent() {
   const navigate = Route.useNavigate();
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const importFromUrl = useEffectEvent(() => {
     try {
       const jsonString = decompressFromEncodedURIComponent(params.data);
+      console.log(JSON.parse(jsonString));
       const id = create(JSON.parse(jsonString));
       navigate({
         to: `/m/$id`,
@@ -26,6 +27,10 @@ function RouteComponent() {
     } catch {
       setError("Something went wrong!");
     }
+  });
+
+  useEffect(() => {
+    importFromUrl();
   }, []);
 
   if (!error) {

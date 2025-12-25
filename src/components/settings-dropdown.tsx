@@ -8,23 +8,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Cog, Share, Trash2 } from "lucide-react";
 import { useNavigate, useParams } from "@tanstack/react-router";
-import { useAnimate } from "motion/react";
 import { compressToEncodedURIComponent } from "lz-string";
 import { toast } from "sonner";
+import { useHotkeys } from "react-hotkeys-hook";
 
 export function SettingsButton() {
   const params = useParams({ from: "/m/$id" });
   const navigate = useNavigate();
   const { remove, mobs, currentMob } = useMobs();
 
-  const [trigger, animate] = useAnimate();
-
-  // const currentMob = mobs.find((mob) => mob.id === params.id);
-
-  const handleClick = () => {
+  const deleteMob = () => {
     remove(params.id);
     navigate({ to: "/" });
   };
+
+  useHotkeys("shift+d", deleteMob);
+  useHotkeys("e", exportStorage);
 
   function exportStorage() {
     console.log(compressToEncodedURIComponent(JSON.stringify(mobs)));
@@ -42,39 +41,25 @@ export function SettingsButton() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="absolute top-4 right-4 outline-none">
-        <Cog
-          ref={trigger}
-          onMouseOver={() =>
-            animate(trigger.current, {
-              rotate: 180,
-              scale: 1.1,
-            })
-          }
-          onMouseOut={() =>
-            animate(trigger.current, {
-              rotate: 0,
-              scale: 1,
-            })
-          }
-          className="outline-none"
-        />
+      <DropdownMenuTrigger className="outline-none flex flex-row items-center gap-1 hover:text-orange transition-color duration-200 ml-auto">
+        <Cog size={16} className="outline-none" />
+        settings
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-[150px]">
         <DropdownMenuItem asChild>
           <button onClick={exportStorage} className="w-full">
-            <Share /> Export
+            <Share /> export [e]
           </button>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <button
-            onClick={handleClick}
+            onClick={deleteMob}
             className="w-full text-white hover:!text-white cursor-pointer bg-red-500 dark:bg-red-700 hover:!bg-red-800"
           >
-            <Trash2 className="stroke-white" strokeWidth={1} /> Delete
+            <Trash2 className="stroke-white" strokeWidth={1} /> delete [D]
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -56,11 +56,11 @@ function DraggableInput({ id }: { id: string }) {
           id={id.trim()}
           name={id.trim()}
           defaultValue={id.trim()}
-          className={cn(active && "border-blue-500")}
+          className={cn(active && "border-orange")}
         />
         <button
           type="button"
-          className="hover:scale-[1.1] transition-transform"
+          className="hover:text-orange transition-color duration-200"
           onClick={(e) => {
             e.stopPropagation();
             removeParticipant(id);

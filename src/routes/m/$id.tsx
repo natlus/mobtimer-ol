@@ -1,14 +1,14 @@
 import { Input } from "@/components/ui/input";
 import { useMobs } from "@/lib/useMobs";
 
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, PlusCircle } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ParticipantList } from "@/components/participant-list";
 import { ReceptParticipants } from "@/components/recent-participants";
 import { SettingsButton } from "@/components/settings-dropdown";
-import { useAnimate } from "motion/react";
 import { Timer } from "@/components/timer";
+import Controls from "@/components/controls";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/m/$id")({
   component: RouteComponent,
@@ -56,18 +56,19 @@ function RouteComponent() {
   };
 
   return (
-    <div className="bg-gray-50 shadow-lg dark:bg-zinc-900 w-full rounded-xl px-4 py-4 flex flex-col items-center justify-center">
-      <header className="flex items-center justify-center pb-10 pt-10 w-full">
-        <GoBackButton />
-        <SettingsButton />
+    <div className="border-muted border w-full rounded-md flex flex-col items-center justify-center gap-4 pb-4 px-4">
+      <header className="grid grid-cols-3 items-center  w-full py-2 px-4">
+        <div />
         <Timer />
+        <SettingsButton />
       </header>
 
-      <div>
+      <div className="flex flex-col gap-8">
+        <Controls />
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           {participants && <ParticipantList participants={participants} />}
 
-          <div className="mt-4 h-[1px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
+          <div className="mt-4 h-[1px] bg-muted" />
           <div className="mt-4 pb-8 relative">
             {error && (
               <p className="text-red-500 text-xs absolute bottom-[100%] pb-1">
@@ -75,40 +76,16 @@ function RouteComponent() {
               </p>
             )}
             <div className="flex flex-row gap-1 relative">
-              <Input id="add" name="add" placeholder="Add participant" />
-              <button
-                type="submit"
-                className="hidden hover:scale-[1.1] transition-transform"
-              >
-                <PlusCircle strokeWidth={1} />
-              </button>
-              <ReceptParticipants className="absolute top-full" />
+              <Input id="add" name="add" placeholder="add participant" />
+              <Button variant="outline" type="submit">
+                add
+              </Button>
+
+              <ReceptParticipants className="absolute top-full pt-2" />
             </div>
           </div>
         </form>
       </div>
     </div>
-  );
-}
-
-function GoBackButton() {
-  const [ref, animate] = useAnimate();
-
-  return (
-    <Link
-      to="/"
-      className="group absolute left-4 top-4 flex flex-row justify-center gap-1"
-      onMouseOver={() =>
-        animate(ref.current, {
-          x: [null, -8, 0],
-          ease: "easeInOut",
-          duration: 0.1,
-        })
-      }
-      onMouseOut={() => animate(ref.current, { x: 0 })}
-    >
-      <ArrowLeft ref={ref} />
-      Go back
-    </Link>
   );
 }
