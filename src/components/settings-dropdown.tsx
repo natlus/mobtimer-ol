@@ -41,7 +41,7 @@ export function SettingsButton() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="outline-none flex flex-row items-center gap-1 hover:text-orange transition-color duration-200 ml-auto">
+      <DropdownMenuTrigger className="hover:text-orange transition-color ml-auto flex flex-row items-center gap-1 duration-200 outline-none">
         <Cog size={16} className="outline-none" />
         settings
       </DropdownMenuTrigger>
@@ -57,7 +57,7 @@ export function SettingsButton() {
         <DropdownMenuItem asChild>
           <button
             onClick={deleteMob}
-            className="w-full text-white hover:!text-white cursor-pointer bg-red-500 dark:bg-red-700 hover:!bg-red-800"
+            className="w-full cursor-pointer bg-red-500 text-white hover:!bg-red-800 hover:!text-white dark:bg-red-700"
           >
             <Trash2 className="stroke-white" strokeWidth={1} /> delete [D]
           </button>

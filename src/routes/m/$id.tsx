@@ -56,8 +56,8 @@ function RouteComponent() {
   };
 
   return (
-    <div className="border-muted border w-full rounded-md flex flex-col items-center justify-center gap-4 pb-4 px-4">
-      <header className="grid grid-cols-3 items-center  w-full py-2 px-4">
+    <div className="border-muted flex w-full flex-col items-center justify-center gap-4 rounded-md border px-4 pb-4">
+      <header className="grid w-full grid-cols-3 items-center px-4 py-2">
         <div />
         <Timer />
         <SettingsButton />
@@ -68,14 +68,14 @@ function RouteComponent() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           {participants && <ParticipantList participants={participants} />}
 
-          <div className="mt-4 h-[1px] bg-muted" />
-          <div className="mt-4 pb-8 relative">
+          <div className="bg-muted mt-4 h-[1px]" />
+          <div className="relative mt-4 pb-8">
             {error && (
-              <p className="text-red-500 text-xs absolute bottom-[100%] pb-1">
+              <p className="absolute bottom-[100%] pb-1 text-xs text-red-500">
                 {error}
               </p>
             )}
-            <div className="flex flex-row gap-1 relative">
+            <div className="relative flex flex-row gap-1">
               <Input id="add" name="add" placeholder="add participant" />
               <Button variant="outline" type="submit">
                 add

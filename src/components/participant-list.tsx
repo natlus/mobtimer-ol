@@ -46,7 +46,7 @@ function DraggableInput({ id }: { id: string }) {
 
   return (
     <Reorder.Item value={id} dragListener={false} dragControls={controls}>
-      <div className="flex flex-row justify-center items-center gap-1">
+      <div className="flex flex-row items-center justify-center gap-1">
         <GripVertical
           className="cursor-grab active:cursor-grabbing"
           strokeWidth={1}

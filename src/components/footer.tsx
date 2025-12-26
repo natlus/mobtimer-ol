@@ -4,7 +4,7 @@ import ThemeDropdown from "./theme-dropdown";
 export default function Footer() {
   return (
     <footer className="">
-      <div className="container mx-auto text-center gap-1">
+      <div className="container mx-auto gap-1 text-center">
         <ConfigDropdown />
         {" | "}
         <ThemeDropdown />

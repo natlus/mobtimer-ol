@@ -26,11 +26,11 @@ export default function Controls() {
 
   return (
     <>
-      <div className="flex flex-row justify-center items-center gap-6">
+      <div className="flex flex-row items-center justify-center gap-6">
         <Button
           variant="outline"
           onClick={reset}
-          className="flex flex-row gap-1 items-center"
+          className="flex flex-row items-center gap-1"
         >
           <RotateCcw size={16} /> reset [r]
         </Button>
@@ -38,7 +38,7 @@ export default function Controls() {
         <Button
           variant="outline"
           onClick={isRunning ? pause : start}
-          className="flex justify-center items-center gap-1"
+          className="flex items-center justify-center gap-1"
           disabled={!participants?.length}
         >
           {!isRunning ? <PlayIcon size={16} /> : <PauseIcon size={16} />}
@@ -48,7 +48,7 @@ export default function Controls() {
         <Button
           variant="outline"
           onClick={nextDriver}
-          className="flex flex-row gap-1 items-center"
+          className="flex flex-row items-center gap-1"
           disabled={!participants || participants.length < 2}
         >
           <SkipForward size={16} /> next [n]

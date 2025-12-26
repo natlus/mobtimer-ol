@@ -15,10 +15,10 @@ export function Timer() {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex flex-row gap-2 items-center justify-center">
+      <div className="flex flex-row items-center justify-center gap-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="gap-1 flex flex-row items-center p-1 hover:text-orange">
+            <button className="hover:text-orange flex flex-row items-center gap-1 p-1">
               <Time className="text-4xl" />
               <ChevronDown size={18} />
             </button>

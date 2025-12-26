@@ -28,19 +28,19 @@ export default function Header({ className }: { className?: string }) {
     <header className={cn("px-4 py-2", className)}>
       <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
         {mobs.length > 0 && (
-          <div className="flex flex-row items-center gap-2 border-r border-primary/30 pr-2">
+          <div className="border-primary/30 flex flex-row items-center gap-2 border-r pr-2">
             <ListIcon size={16} />
             <h2 className="text-xl">mobs</h2>
           </div>
         )}
-        <div className="relative overflow-scroll px-4 flex flex-row items-center gap-4">
+        <div className="relative flex flex-row items-center gap-4 overflow-scroll px-4">
           {mobs.map((mob, index) => (
             <Link
               key={mob.id}
               to="/m/$id"
               params={{ id: mob.id }}
               className={cn(
-                "whitespace-nowrap relative my-2 hover:text-orange transition-color duration-200",
+                "hover:text-orange transition-color relative my-2 whitespace-nowrap duration-200",
                 mob.id === currentMob?.id && "text-peppermint",
               )}
             >

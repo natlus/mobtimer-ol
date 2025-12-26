@@ -21,10 +21,10 @@ function RootLayout() {
     <>
       <HeadContent />
 
-      <div className="grid grid-rows-[56px_1fr] h-full gap-2 p-2">
+      <div className="grid h-full grid-rows-[56px_1fr] gap-2 p-2">
         <Header />
-        <div className="flex mx-auto max-w-full gap-2 h-max self-start pt-16">
-          <div className="relative flex justify-center items-start">
+        <div className="mx-auto flex h-max max-w-full gap-2 self-start pt-16">
+          <div className="relative flex items-start justify-center">
             <Outlet />
           </div>
         </div>
